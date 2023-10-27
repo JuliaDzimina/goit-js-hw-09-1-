@@ -14,6 +14,8 @@ const refs = {
     buttonStart: document.querySelector('[data-start]'),
   };
 
+refs.buttonStart.disabled = true;
+refs.buttonStart.addEventListener('click', startTimer)
 let timerId = null;
 
 const options = {
@@ -26,7 +28,7 @@ const options = {
          Notiflix.Notify.success('Please choose a date in the future');
        } else {
         Notiflix.Notify.success('The date is selected');
-        refs.buttonStart.removeAttribute('disabled')
+        refs.buttonStart.disabled = false;
        }
     }
 }
@@ -34,11 +36,8 @@ const options = {
 flatpickr(refs.dateTime, options);
 
 
-refs.buttonStart.disabled = true;
-refs.buttonStart.addEventListener('click', startTimer)
-
 const currentTime = new Date();
-let selectedDate = null;
+
 
 function startTimer() {
  let futureTime = new Date(refs.dateTime.value);
@@ -51,12 +50,14 @@ function startTimer() {
     refs.dataMinutes.textContent = addLeadingZero(convertedData.minutes);
     refs.dataSeconds.textContent = addLeadingZero(convertedData.seconds);
     targetTime -= 1000;
-    console.log(convertedData);
+    
    if (targetTime <= 0) {
     clearInterval(selectedDate);
   }
  }, 1000)
 }
+
+
 
 
 function addLeadingZero(value) {
@@ -81,3 +82,5 @@ function convertMs(ms) {
   
     return { days, hours, minutes, seconds };
   }
+
+  
