@@ -25,6 +25,7 @@ const options = {
        if (selectedDates[0] <= new Date()) {
          Notiflix.Notify.success('Please choose a date in the future');
        } else {
+        Notiflix.Notify.success('The date is selected');
         refs.buttonStart.removeAttribute('disabled')
        }
     }
@@ -51,10 +52,10 @@ function startTimer() {
     refs.dataSeconds.textContent = addLeadingZero(convertedData.seconds);
     targetTime -= 1000;
     console.log(convertedData);
-  }, 1000)
    if (targetTime <= 0) {
     clearInterval(selectedDate);
   }
+ }, 1000)
 }
 
 
